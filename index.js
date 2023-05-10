@@ -72,13 +72,12 @@ function handleOnChange() {
   var selectedItem = document.querySelector("select").value;
   console.log(selectedItem);
 
-
+  document.querySelector(".Card-api-2").innerHTML = "";
   // Getting All the Data Again on ONCHANGE 
 
   if (selectedItem === undefined || selectedItem === "Filter by Region" || selectedItem === NaN) {
 
     document.querySelector(".Card-api").style.display = "block";
-    document.querySelector(".Card-api-2").style.display = "none";
 
 
     var values = fetch("https://restcountries.com/v3.1/all");
