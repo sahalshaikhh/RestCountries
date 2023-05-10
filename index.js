@@ -220,10 +220,10 @@ function handleOnChange() {
 
 
 // Click Is INCOMPLETE
-function handleCardClick(event) {
-  var values = fetch("https://restcountries.com/v3.1/all");
+// function handleCardClick(event) {
+//   var values = fetch("https://restcountries.com/v3.1/all");
 
-}
+// }
 
 
 
