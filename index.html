@@ -44,6 +44,7 @@
           <input
             class="Text-input py-2 pl-8 pr-2"
             type="text"
+            onchange="handleOnChangeInput(event)"
             id="input"
             placeholder="Search for a Country..."
           />
@@ -70,8 +71,14 @@
           </select>
         </div>
       </div>
-      <div class="Card-api w-[18.5rem] m-auto"></div>
-      <div class="Card-api-2 w-[18.5rem] m-auto"></div>
+      <div
+        class="onClickCard Card-api w-[18.5rem] m-auto"
+        onclick="handleCardClick(event)"
+      ></div>
+      <div
+        class="onClickCard Card-api-2 w-[18.5rem] m-auto"
+        onclick="handleCardClick(event)"
+      ></div>
     </main>
 
     <!-- End of Main Section -->

@@ -24,7 +24,9 @@ function ThemeHandleChange() {
 
 
 
-// Fetching Data from REST API for the First Time
+
+// Fetching Data from REST API for the First Time for all User
+
 
 var values = fetch("https://restcountries.com/v3.1/all");
 values.then((promise) => {
@@ -65,12 +67,68 @@ values.then((promise) => {
 
 
 
-// Starting of OnChange
+// Starting of OnChange for Search bar
+
+
+function handleOnChangeInput(e) {
+
+  var ValuesForCountry = e.target.value;
+  console.log(ValuesForCountry)
+
+  if (ValuesForCountry !== "") {
+    var card2 = document.querySelector(".Card-api-2").innerHTML = "";
+    document.querySelector(".Card-api").innerHTML = "";
+
+  }
+
+  var InputValues = fetch(`https://restcountries.com/v3.1/name/${ValuesForCountry}?fullText=true`);
+
+  InputValues.then((promise) => {
+    var DataParsing = promise.json();
+    return DataParsing;
+  }).then((promise2) => {
+    console.log(promise2);
+    promise2.forEach(element => {
+
+      var imgLoc = element.flags.png;
+      var imgAlt = element.flags.alt;
+      const Markup = `<div class="card rounded-sm border my-8">
+            <div class="img">
+              <img
+                class="h-40 w-full rounded-t-sm"
+                src= ${imgLoc}
+                alt=${imgAlt}
+              />
+            </div>
+            <div class="about-Country p-4 pb-8">
+              <div class="countryName my-6">
+                <h1 class="text-2xl">${element.name.common}</h1>
+              </div>
+              <div class="details">
+                <div class="population flex flex-col gap-2">
+                  <p class="">
+                    Population :
+                    <span class="font-thin text-sm">${element.population}</span>
+                  </p>
+                  <p>Region : <span>${element.region}</span></p>
+                  <p class="capital">Capital : <span>${element.capital} </span></p>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      document.querySelector(".Card-api-2").insertAdjacentHTML('beforeend', Markup)
+    });
+  })
+}
+
+
+
+// Starting of OnChange for Drop-Down
+
 
 function handleOnChange() {
 
   var selectedItem = document.querySelector("select").value;
-  console.log(selectedItem);
 
   document.querySelector(".Card-api-2").innerHTML = "";
   // Getting All the Data Again on ONCHANGE 
@@ -118,9 +176,6 @@ function handleOnChange() {
       });
     })
 
-    // Trying to get the Data of Specific Region but the Problem is that we were unable to show it on the screen 
-    // The data gets on console but doesn't show on Screen
-
   } else if (selectedItem) {
     document.querySelector(".Card-api").style.display = "none";
 
@@ -129,7 +184,7 @@ function handleOnChange() {
       var parsingOfData = promise.json();
       return parsingOfData;
     }).then((promise2) => {
-      console.log(promise2);
+      // console.log(promise2);
       promise2.forEach(element => {
         var imgLoc = element.flags.png;
         var imgAlt = element.flags.alt;
@@ -164,6 +219,11 @@ function handleOnChange() {
 }
 
 
+// Click Is INCOMPLETE
+function handleCardClick(event) {
+  var values = fetch("https://restcountries.com/v3.1/all");
+
+}
 
 
 
